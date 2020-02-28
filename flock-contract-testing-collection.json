@@ -1,0 +1,151 @@
+{
+	"info": {
+		"_postman_id": "1c547fd6-2a6b-4cdd-9657-7daf63c437fc",
+		"name": "Flock",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "contract-testing",
+			"item": [
+				{
+					"name": "Initialize Zoo API",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{flockDomainUrl}}/initialize",
+							"host": [
+								"{{flockDomainUrl}}"
+							],
+							"path": [
+								"initialize"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Zoos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{flockDomainUrl}}/zoo",
+							"host": [
+								"{{flockDomainUrl}}"
+							],
+							"path": [
+								"zoo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Save Zoo",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": \"12345\",\n\t\"address\": {\n\t\t\"streetName\": \"Oudegracht aan de Werf\",\n\t\t\"houseNumber\": \"62\",\n\t\t\"zipCode\": \"3511 AC\",\n\t\t\"country\": \"NL\"\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{flockDomainUrl}}/zoo",
+							"host": [
+								"{{flockDomainUrl}}"
+							],
+							"path": [
+								"zoo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Mammals",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6601aa29-6504-427f-8b42-b0b381a9a67c",
+								"exec": [
+									"pm.test(\"Get first mammal id\", function () {",
+									"    pm.response.to.be.ok;",
+									"    ",
+									"    var jsonData = JSON.parse(responseBody);",
+									"    postman.setEnvironmentVariable(\"mammalId\", jsonData[0].id);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{flockDomainUrl}}/mammal",
+							"host": [
+								"{{flockDomainUrl}}"
+							],
+							"path": [
+								"mammal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Mammal",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": \"{{mammalId}}\",\n\t\"name\": \"Alpaca\",\n\t\"species\": \"Kameelachtigen\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{flockDomainUrl}}/mammal/{{mammalId}}",
+							"host": [
+								"{{flockDomainUrl}}"
+							],
+							"path": [
+								"mammal",
+								"{{mammalId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
