@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.2.5.RELEASE</version>
+		<version>2.2.6.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>community.flock</groupId>
@@ -17,6 +17,7 @@
 	<properties>
 		<java.version>13</java.version>
 		<spring-cloud.version>Hoxton.SR1</spring-cloud.version>
+		<spring-cloud-contract.version>2.2.1.RELEASE</spring-cloud-contract.version>
 		<lombok.version>1.18.12</lombok.version>
 	</properties>
 
@@ -36,17 +37,10 @@
 			<scope>provided</scope>
 		</dependency>
 
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>org.junit.vintage</groupId>
-					<artifactId>junit-vintage-engine</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
@@ -72,11 +66,10 @@
 			<plugin>
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-contract-maven-plugin</artifactId>
-				<version>2.2.1.RELEASE</version>
+				<version>${spring-cloud-contract.version}</version>
 				<extensions>true</extensions>
 				<configuration>
-					<baseClassForTests>community.flock.contracttesting.BaseTestClass</baseClassForTests>
-					<testFramework>JUNIT5</testFramework>
+					<baseClassForTests>community.flock.contracttesting.ZooBase</baseClassForTests>
 				</configuration>
 			</plugin>
 			<plugin>
